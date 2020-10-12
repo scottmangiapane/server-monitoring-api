@@ -1,0 +1,154 @@
+openapi: 3.0.2
+info:
+  title: Server Monitoring API
+  version: 1.0.0
+paths:
+  /accounts:
+    post:
+      tags:
+      - accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: OK
+  /accounts/{accountId}:
+    delete:
+      tags:
+        - accounts
+      security:
+        - cookieAuth: []
+      parameters:
+        - in: path
+          name: accountId
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+    get:
+      tags:
+        - accounts
+      security:
+        - cookieAuth: []
+      parameters:
+        - in: path
+          name: accountId
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+  /auth/creds/email:
+    post:
+      tags:
+      - auth
+      security:
+        - cookieAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                newEmail:
+                  type: string
+      responses:
+        '200':
+          description: OK
+  /auth/creds/password:
+    post:
+      tags:
+      - auth
+      security:
+        - cookieAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                newPassword:
+                  type: string
+      responses:
+        '200':
+          description: OK
+  /auth/mfa/disable:
+    post:
+      tags:
+      - auth
+      security:
+        - cookieAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+      responses:
+        '200':
+          description: OK
+  /auth/mfa/enable:
+    post:
+      tags:
+      - auth
+      security:
+        - cookieAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+      responses:
+        '200':
+          description: OK
+  /auth/sign-in:
+    post:
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+                token:
+                  type: integer
+      responses:
+        '200':
+          description: OK
+  /auth/sign-out:
+    post:
+      tags:
+      - auth
+      responses:
+        '200':
+          description: OK
+  /info/static:
+    get:
+      tags:
+        - info
+      responses:
+        '200':
+          description: OK

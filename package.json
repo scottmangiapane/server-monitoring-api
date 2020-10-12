@@ -1,32 +1,37 @@
 {
-  "name": "server-monitoring",
-  "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/scottmangiapane/server-monitoring.git"
-  },
-  "author": "Scott Mangiapane",
-  "license": "GPL-3.0",
-  "bugs": {
-    "url": "https://github.com/scottmangiapane/server-monitoring/issues"
-  },
-  "homepage": "https://github.com/scottmangiapane/server-monitoring#readme",
-  "dependencies": {
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "helmet": "^3.23.3",
-    "os": "^0.1.1",
-    "public-ip": "^4.0.1",
-    "systeminformation": "^4.26.9",
-    "ws": "^7.3.1"
-  },
-  "optionalDependencies": {
-    "bufferutil": "^4.0.1",
-    "utf-8-validate": "^5.0.2"
-  }
+    "name": "server-monitoring-api",
+    "version": "1.0.0",
+    "author": "Scott Mangiapane",
+    "license": "GPL-3.0",
+    "private": true,
+    "scripts": {
+        "start": "node ./server.js",
+        "start:watch": "nodemon -e js,json,yaml 'node ./server.js'",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "dependencies": {
+        "bcrypt": "^5.0.0",
+        "bookshelf": "^1.2.0",
+        "connect-redis": "^5.0.0",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "express-async-errors": "^3.1.1",
+        "express-session": "^1.17.1",
+        "express-validator": "^6.6.1",
+        "helmet": "^3.23.3",
+        "knex": "^0.21.4",
+        "morgan": "^1.10.0",
+        "os": "^0.1.1",
+        "pg": "^8.3.0",
+        "public-ip": "^4.0.1",
+        "redis": "^3.0.2",
+        "speakeasy": "^2.0.0",
+        "swagger-ui-express": "^4.1.4",
+        "systeminformation": "^4.26.9",
+        "ws": "^7.3.1",
+        "yamljs": "^0.3.0"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.4"
+    }
 }
