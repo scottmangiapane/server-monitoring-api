@@ -28,7 +28,6 @@
         "speakeasy": "^2.0.0",
         "swagger-ui-express": "^4.1.4",
         "systeminformation": "^4.26.9",
-        "ws": "^7.3.1",
         "yamljs": "^0.3.0"
     },
     "devDependencies": {

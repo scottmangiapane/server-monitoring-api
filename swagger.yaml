@@ -145,6 +145,13 @@ paths:
       responses:
         '200':
           description: OK
+  /info/dynamic:
+    get:
+      tags:
+        - info
+      responses:
+        '200':
+          description: OK
   /info/static:
     get:
       tags:
