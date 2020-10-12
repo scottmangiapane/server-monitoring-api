@@ -83,48 +83,53 @@ const server = app.listen(port, () => console.log(`Server is running...`));
 const wss = new WebSocket.Server({ server });
 
 const data = {
-	cpu: {
-		cores: [],
-		loadavg: [],
-		nodes: [],
-		temp: null
-	},
-	memory: {
-		memTotal: null,
-		memUsed: null,
-		swapTotal: null,
-		swapUsed: null
-	}
+    cpu: {
+        cores: [],
+        loadavg: [],
+        nodes: [],
+        temp: null
+    },
+    memory: {
+        memTotal: null,
+        memUsed: null,
+        swapTotal: null,
+        swapUsed: null
+    },
+    time: {
+        uptime: null
+    }
 };
 
 setInterval(() => {
-	// CPU
-	data.cpu.cores = os.cpus().map(c => c.speed);
-	data.cpu.loadavg = os.loadavg();
-	spawn('sh', [
-		'-c',
-		'top -bn1 | '
-			+ 'grep "Cpu(s)" | '
-			+ 'sed "s/.*, *\\([0-9.]*\\)%* id.*/\\1/" | '
-			+ 'awk "{print 100 - \\$1}"'
-	]).stdout.on('data', o => {
-		while (data.cpu.nodes.length >= 60) {
-			data.cpu.nodes.shift();
-		}
-		data.cpu.nodes.push(parseFloat(o));
-	});
-	si.cpuTemperature(o => {
-		data.cpu.temp = Math.round(o.main);
-	});
-	// memory
-	si.mem(o => {
-		data.memory.memUsed = Math.round(o.active / 1000000);
-		data.memory.memTotal = Math.round(o.total / 1000000);
-		data.memory.swapUsed = Math.round(o.swapused / 1000000);
-		data.memory.swapTotal = Math.round(o.swaptotal / 1000000);
-	});
-	// send data to clients
-	wss.clients.forEach(client => {
-		client.send(JSON.stringify(data));
-	});
+    // CPU
+    data.cpu.cores = os.cpus().map(c => c.speed);
+    data.cpu.loadavg = os.loadavg();
+    spawn('sh', [
+        '-c',
+        'top -bn1 | '
+            + 'grep "Cpu(s)" | '
+            + 'sed "s/.*, *\\([0-9.]*\\)%* id.*/\\1/" | '
+            + 'awk "{print 100 - \\$1}"'
+    ]).stdout.on('data', o => {
+        while (data.cpu.nodes.length >= 60) {
+            data.cpu.nodes.shift();
+        }
+        data.cpu.nodes.push(parseFloat(o));
+    });
+    si.cpuTemperature(o => {
+        data.cpu.temp = Math.round(o.main);
+    });
+    // memory
+    si.mem(o => {
+        data.memory.memUsed = Math.round(o.active / 1000000);
+        data.memory.memTotal = Math.round(o.total / 1000000);
+        data.memory.swapUsed = Math.round(o.swapused / 1000000);
+        data.memory.swapTotal = Math.round(o.swaptotal / 1000000);
+    });
+    // uptime
+    data.time.uptime = si.time().uptime;
+    // send data to clients
+    wss.clients.forEach(client => {
+        client.send(JSON.stringify(data));
+    });
 }, 1000);
