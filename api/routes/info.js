@@ -1,8 +1,9 @@
 const router = require('express').Router();
 const info = require('../controllers/info');
+const { verifySession } = require('../controllers/verification');
 
-router.get('/dynamic', info.getDynamic);
+router.get('/dynamic', verifySession, info.getDynamic);
 
-router.get('/static', info.getStatic);
+router.get('/static', verifySession, info.getStatic);
 
 module.exports = router;

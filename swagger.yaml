@@ -149,6 +149,8 @@ paths:
     get:
       tags:
         - info
+      security:
+        - cookieAuth: []
       responses:
         '200':
           description: OK
@@ -156,6 +158,8 @@ paths:
     get:
       tags:
         - info
+      security:
+        - cookieAuth: []
       responses:
         '200':
           description: OK
