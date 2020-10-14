@@ -39,6 +39,7 @@ app.use(session({
         sameSite: process.env.DEVELOPMENT !== 'true'
     },
     name: 'session',
+    proxy: process.env.DEVELOPMENT !== 'true',
     resave: false,
     rolling: true,
     saveUninitialized: false,
