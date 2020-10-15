@@ -12,6 +12,9 @@ const _verifyAccountId = async (req, res, next) => {
 };
 
 const postIndex = async (req, res, next) => {
+    if (process.env.ALLOW_SIGN_UP === 'false') {
+        return res.status(403).json({ errors: [{ msg: 'Account creation is disabled' }] });
+    }
     const { email, password } = req.body;
     if (await new Account({ email }).fetch()) {
         return res.status(409).json({ errors: [{ msg: 'Email is already in use' }] });

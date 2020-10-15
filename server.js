@@ -10,7 +10,7 @@ const YAML = require('yamljs');
 
 const RateLimiter = require('./api/utils/rate-limiter');
 const { blocker, punisher } = new RateLimiter({
-    maxTokens: 60,
+    maxTokens: 120,
     seconds: 60
 });
 
