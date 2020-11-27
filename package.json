@@ -27,7 +27,7 @@
         "redis": "^3.0.2",
         "speakeasy": "^2.0.0",
         "swagger-ui-express": "^4.1.4",
-        "systeminformation": "^4.26.9",
+        "systeminformation": "^4.30.5",
         "yamljs": "^0.3.0"
     },
     "devDependencies": {
